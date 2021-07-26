@@ -2,28 +2,28 @@
 地味に 更新SQL 文字列を作って、ExecuteNonQuery() を行を読みだしているループ内で実行
 
 ```CS
-                // 列名より列番号を取得
-                int index = myReader.GetOrdinal("社員コード");
-                // 列番号で、値を取得して文字列化
-                string text = myReader.GetString(index);
-                // 実際のコンソールに出力
-                Console.WriteLine(text);
-                // 出力ウインドウに出力
-                Debug.WriteLine($"Debug:{text}");
+// 列名より列番号を取得
+int index = myReader.GetOrdinal("社員コード");
+// 列番号で、値を取得して文字列化
+string text = myReader.GetString(index);
+// 実際のコンソールに出力
+Console.WriteLine(text);
+// 出力ウインドウに出力
+Debug.WriteLine($"Debug:{text}");
 
-                // 生年月日を日付型で取得
-                index = myReader.GetOrdinal("生年月日");
-                DateTime dt = myReader.GetDate(index);
-                // 1日前に変更
-                dt = dt.AddDays(-1);
+// 生年月日を日付型で取得
+index = myReader.GetOrdinal("生年月日");
+DateTime dt = myReader.GetDate(index);
+// 1日前に変更
+dt = dt.AddDays(-1);
 
-                // 更新用SQL を作成
-                updCommand.CommandText = $@"update
-                    社員マスタ
-                    set 生年月日 = '{dt.ToString("yyyy/MM/dd")}'
-                    where 社員コード = '{text}'";
+// 更新用SQL を作成
+updCommand.CommandText = $@"update
+    社員マスタ
+    set 生年月日 = '{dt.ToString("yyyy/MM/dd")}'
+    where 社員コード = '{text}'";
 
-                Debug.WriteLine($"Debug:{updCommand.CommandText}");
+Debug.WriteLine($"Debug:{updCommand.CommandText}");
 
-                updCommand.ExecuteNonQuery();
+updCommand.ExecuteNonQuery();
 ```
